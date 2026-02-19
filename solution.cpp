@@ -1,67 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-void solve()
+int main()
 {
-    long long n, k, q;
-    cin >> n >> k >> q;
-    queue<int> que;
-    vector<int> v(n);
+    int n, x;
+    cin >> n >> x;
+    int sum = 0;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= sqrt(x); i++)
     {
-        int x;
-        cin >> x;
-        v[i] = x;
-        if (x > q)
-            que.push(i);
-    }
-    // queue<int> t=que;
-    // cout<<endl;
-    // while(!t.empty()){
-    //     cout<<t.front()<<' ';
-    //     t.pop();
-
-    // }
-
-    // cout<<endl;
-    long long curpos = 0;
-    long long sum = 0;
-    long long ele;
-
-    while (!que.empty())
-
-    {
-
-        ele = que.front() - curpos;
-        if (ele >= k)
+        if (x % i == 0)
         {
-            long long npos = ele - k + 1;
-            sum += (npos * (npos + 1)) / 2;
+            if (i <= n and x / i <= n)
+                sum += 2;
         }
-        curpos = que.front() + 1;
-        que.pop();
-    }
-
-    ele = n  - curpos;
-
-    if (ele >= k)
-    {
-        long long  npos = ele - k + 1;
-        sum += (npos * (npos + 1)) / 2;
     }
 
     cout << sum;
-}
-
-int main()
-{
-    int t;
-    cin >> t;
-    while (t--)
-    {
-
-        solve();
-        cout << endl;
-    }
 }
