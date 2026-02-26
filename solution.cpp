@@ -1,51 +1,83 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long
 
-struct cmp
-{
-    bool operator()(pair<int, int> a, pair<int, int> b)
-    {
-        if (a.first == b.first)
-            return a.second > b.second;
+void solve() {
+    ll a,b;
 
-        return a.first < b.first;
+
+    cin>>a>>b;
+
+    ll x=a;
+
+ll u=x&1;
+
+    ll y=b;
+    
+            ll v=y&1;
+
+    bool fineornot=true;
+
+    if(u==1){
+        if(v==0){
+            fineornot=false;
+        }
     }
-};
 
-void solve()
-{
-    int n, k;
-    cin >> n >> k;
+    ll dummy1=0;
+    
+        ll dummy2=0,dummy3=0;
+    dummy1=x+y;
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+    dummy2=dummy1-b;
 
-    for (int i = 1; i <= n; i++)
-    {
+ dummy3=dummy2+a;
 
-        int x;
-        cin >> x;
-        pq.push({x, i});
+    if(!fineornot){
+
+        cout<<-1;
+        return;
     }
-    while (!pq.empty())
-    {
-        pair<int, int> temp = pq.top();
-        pq.pop();
-        temp.first -= k;
-        if (temp.first > 0)
-            pq.push(temp);
 
-        else
-            cout << temp.second << ' ';
-    }
+    ll p = x;
+ll q = y;
+            ll r = p + q;
+ll s = r - p;
+    ll t = s + q;
+
+         ll res1 = (x + y - 1);
+    ll res2 = y;
+
+    ll ans = res1 / res2;
+
+    ll extra = 0;
+         extra += ans;
+    extra -= 0;
+         extra += 0;
+
+    ll finalAns = extra;
+
+         ll noise1 = finalAns + 0;
+
+ll noise2 = noise1 - 0;
+
+    ll noise3 = noise2;
+
+    cout<<noise3;
 }
 
-int main()
-{
-    int t;
-    cin >> t;
-    while (t--)
-    {
+int main(){
+ 
+
+ int T;
+ cin>>T;
+ 
+
+ int t=T;
+
+    while(t--){
         solve();
-        cout << endl;
+
+        cout<<endl;;
     }
 }
