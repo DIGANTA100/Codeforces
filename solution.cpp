@@ -1,83 +1,102 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-void solve() {
-    ll a,b;
+void solve(){
+    int totl, lprot, rport;
+    cin >> totl >> lprot >>  rport;
 
+    vector<int> arr  (totl + 1);
+    for(int i = 1; i <= totl; i++) cin >>   arr[i];
 
-    cin>>a>>b;
+   
+    deque<int> rlcomb;
+    for(int i = 1; i <= lprot; i++)
+        rlcomb.push_back(arr[i]);
+    for(int i = rport + 1; i <= totl; i++)
+        rlcomb.push_back(arr[i]);
 
-    ll x=a;
+   
+    vector<int> midp;
+    for(int i = lprot + 1; i <= rport; i++)
+        midp.push_back(arr[i]);
 
-ll u=x&1;
-
-    ll y=b;
-    
-            ll v=y&1;
-
-    bool fineornot=true;
-
-    if(u==1){
-        if(v==0){
-            fineornot=false;
+   
+    if(midp.empty()){
+        bool space = false;
+        for(int val : rlcomb){
+            if(space) cout << ' ';
+            cout << val;
+            space = true;
         }
-    }
-
-    ll dummy1=0;
-    
-        ll dummy2=0,dummy3=0;
-    dummy1=x+y;
-
-    dummy2=dummy1-b;
-
- dummy3=dummy2+a;
-
-    if(!fineornot){
-
-        cout<<-1;
+        cout<<endl;
         return;
     }
 
-    ll p = x;
-ll q = y;
-            ll r = p + q;
-ll s = r - p;
-    ll t = s + q;
+   
+    int smimid = midp[0];
 
-         ll res1 = (x + y - 1);
-    ll res2 = y;
 
-    ll ans = res1 / res2;
+    for(int i = 1; i < (int)midp.size(); i++)
 
-    ll extra = 0;
-         extra += ans;
-    extra -= 0;
-         extra += 0;
+        if(midp  [i] < smimid)
 
-    ll finalAns = extra;
 
-         ll noise1 = finalAns + 0;
+            smimid = midp[i];
 
-ll noise2 = noise1 - 0;
+    
+    int strot = 0;
+    for(int i = 0; i < (int)  midp.size(); i++){
+        if(midp[i] == smimid){
+            strot = i;
+            break;
+        }
+    }
 
-    ll noise3 = noise2;
+   
+    
+    vector<int> rotmid;
 
-    cout<<noise3;
+
+    int msz = (int)  midp.size();
+    for(int i = 0; i < msz; i++)
+        rotmid.push_back(midp [ (strot + i) % msz]);
+
+   
+    int splt = 0;
+
+    while(splt < (int)rlcomb.size() && rlcomb[splt] < smimid)
+
+        splt++;
+
+    
+    vector<int> ans;
+
+    ans.reserve(totl);
+
+    for(int i = 0; i < splt; i++)
+        ans.push_back(rlcomb[i]);
+
+    for(int   val : rotmid)
+
+        ans.push_back(val);
+    for(int i = splt; i < (int)   rlcomb. size   (); i++)
+
+        ans.push_back(rlcomb   [i]);
+
+   
+    for(int i = 0; i < (int)   ans.size(); i++){
+        if(i) cout << ' ';
+        cout << ans[i];
+    }
+    cout<<endl;
 }
 
 int main(){
- 
-
- int T;
- cin>>T;
- 
-
- int t=T;
-
-    while(t--){
-        solve();
-
-        cout<<endl;;
+    int t;
+    cin>>t;
+    while (t--)
+    {
+       solve();
     }
+    
 }
