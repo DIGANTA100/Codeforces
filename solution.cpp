@@ -8,7 +8,9 @@ void solve()
     if (b == 1)
     {
         cout << "NO";
+        return;
     }
+    cout<<"YES"<<endl;
 
     cout << a * b << ' ' << a << ' ' << a * (b + 1);
 }
