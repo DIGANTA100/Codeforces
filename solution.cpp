@@ -5,48 +5,49 @@ void solve()
 {
     int n;
     cin >> n;
-    int a[n + 1], b[n + 1];
-    for (int i = 1; i <= n; i++)
-        cin >> a[i];
-    for (int i = 1; i <= n; i++)
-        cin >> b[i];
+    vector<int> v(n);
+    bool f = true;
+    for (auto &e : v)
+        cin >> e;
 
-    int ha[1 + 2 * n]={0};
-    int  hb[1 + 2 * n]={0};
-
-    int prev = 1;
-
-    for (int i = 2; i <= n; i++)
+    int firstcnt = 1;
+    for (int i = 1; i < n; i++)
     {
-        if (a[i] != a[i - 1])
+        if (v[i] != v[i - 1])
         {
-            ha[a[i - 1]] = max(i - prev,ha[a[i - 1]]);
-            prev = i;
+            f = false;
+            break;
         }
+
+        firstcnt++;
     }
 
-    ha[a[n]] = max(n + 1 - prev, ha[a[n]] );
-
-    prev = 1;
-
-    for (int i = 2; i <= n; i++)
+    if (f)
     {
-        if (b[i] != b[i - 1])
-        {
-            hb[b[i - 1]] = max(i - prev,hb[b[i - 1]]);
-            prev = i;
-        }
+        cout << 0;
+        return;
     }
 
-    hb[b[n]] = max(n + 1 - prev,hb[b[n]]);
-
-    int mx = -100;
-    for (int i = 1; i <= 2 * n; i++)
+    int lastcnt = 1;
+    for (int i = n - 2; i >= 0; i--)
     {
-        mx = max(ha[i] + hb[i], mx);
+        if (v[i] != v[i + 1])
+            break;
+        lastcnt++;
     }
 
-    cout << mx;
+    if (v[0] != v[n - 1])
+    {
+        int mx = max(firstcnt, lastcnt);
+        cout << n - mx;
+        return;
+    }
+
+    else
+    {
+        cout << n - (firstcnt + lastcnt);
+        return;
+    }
 }
 
 int main()
