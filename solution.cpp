@@ -5,57 +5,53 @@ void solve()
 {
     int n;
     cin >> n;
-    queue<int> q;
-    bool f = false;
-    int cur = -1;
-    int curcnt = 0;
-    vector<int> v(n + 1);
+    int a[n + 1], b[n + 1];
     for (int i = 1; i <= n; i++)
+        cin >> a[i];
+    for (int i = 1; i <= n; i++)
+        cin >> b[i];
+
+    int ha[1 + 2 * n]={0};
+    int  hb[1 + 2 * n]={0};
+
+    int prev = 1;
+
+    for (int i = 2; i <= n; i++)
     {
-        int x;
-        cin >> x;
-        v[i] = x;
-        if (x != cur)
+        if (a[i] != a[i - 1])
         {
-            q.push(i);
-            cur = x;
-            if (curcnt == 1)
-                f = true;
-
-            curcnt = 0;
+            ha[a[i - 1]] = max(i - prev,ha[a[i - 1]]);
+            prev = i;
         }
-
-        curcnt++;
     }
 
-    if (f or n==1 or curcnt==1)
+    ha[a[n]] = max(n + 1 - prev, ha[a[n]] );
+
+    prev = 1;
+
+    for (int i = 2; i <= n; i++)
     {
-        cout << -1;
-        return;
+        if (b[i] != b[i - 1])
+        {
+            hb[b[i - 1]] = max(i - prev,hb[b[i - 1]]);
+            prev = i;
+        }
     }
 
-    while (!q.empty())
+    hb[b[n]] = max(n + 1 - prev,hb[b[n]]);
+
+    int mx = -100;
+    for (int i = 1; i <= 2 * n; i++)
     {
-        int first = q.front();
-
-        int last;
-        q.pop();
-        if (!q.empty())
-            last = q.front();
-
-        else
-            last = v.size();
-
-        int sz = last - first;
-
-        cout << last - 1 << ' ';
-        for (int i = first; i < last - 1; i++)
-            cout << i << ' ';
+        mx = max(ha[i] + hb[i], mx);
     }
+
+    cout << mx;
 }
 
 int main()
 {
+
     int t;
     cin >> t;
     while (t--)
