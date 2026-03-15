@@ -4,60 +4,73 @@ using namespace std;
 void solve()
 {
     int n;
+
     cin >> n;
-    vector<int> v(n);
-    bool f = true;
-    for (auto &e : v)
-        cin >> e;
 
-    int firstcnt = 1;
-    for (int i = 1; i < n; i++)
+    vector<int> cv(n + 1);
+
+    vector<int> pv(n + 1);
+
+
+for (int i = 1; i <= n; i++)
+        cin >>cv[i]>>pv[i];
+
+         deque<pair<int, int>> tt;
+
+    for (int i = 1;i <= n;i++)
+
+        tt.push_back({cv[i],pv[i]});
+
+    vector<int> carr(n + 1);
+    vector<int>    parr(n + 1);
+
+    int id = 1;
+    while (!tt.empty())
     {
-        if (v[i] != v[i - 1])
+        carr[id] = tt.front().first;
+
+     parr[id] = tt.front().second;
+            tt.pop_front();
+        id++;
+    }
+
+    map<int, bool> cons;
+    for (int i = 1; i <= n; i++)
+    
+        cons[i] = false;
+
+    
+    double penalm = 0.0;
+
+ double obt = 0.0;
+
+double mxx = 0.0;
+    double flag = 0.0;
+
+    for (int i = n; i >= 1; i--)
+    {
+        penalm =(double) parr[i]/100.0;
+        obt=(double)  carr[i];
+        mxx = flag * penalm;
+
+        if (parr[i] == 0 || obt >= mxx)
         {
-            f = false;
-            break;
+            cons[i] = true;
+            flag = obt + (1.0 - penalm) * flag;
         }
-
-        firstcnt++;
     }
 
-    if (f)
-    {
-        cout << 0;
-        return;
-    }
-
-    int lastcnt = 1;
-    for (int i = n - 2; i >= 0; i--)
-    {
-        if (v[i] != v[i + 1])
-            break;
-        lastcnt++;
-    }
-
-    if (v[0] != v[n - 1])
-    {
-        int mx = max(firstcnt, lastcnt);
-        cout << n - mx;
-        return;
-    }
-
-    else
-    {
-        cout << n - (firstcnt + lastcnt);
-        return;
-    }
+    cout << fixed << setprecision(10) << flag << endl;
 }
 
 int main()
 {
-
     int t;
     cin >> t;
+    
     while (t--)
     {
         solve();
-        cout << endl;
+        cout << "";
     }
 }
