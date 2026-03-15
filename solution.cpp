@@ -3,74 +3,56 @@ using namespace std;
 
 void solve()
 {
-    int n;
+    long long a, b;
+    cin >> a >> b;
 
-    cin >> n;
+    long long mx, mn;
+    mx = max(a, b);
+    mn = min(a, b);
 
-    vector<int> cv(n + 1);
-
-    vector<int> pv(n + 1);
-
-
-for (int i = 1; i <= n; i++)
-        cin >>cv[i]>>pv[i];
-
-         deque<pair<int, int>> tt;
-
-    for (int i = 1;i <= n;i++)
-
-        tt.push_back({cv[i],pv[i]});
-
-    vector<int> carr(n + 1);
-    vector<int>    parr(n + 1);
-
-    int id = 1;
-    while (!tt.empty())
+    if (mx % mn != 0)
     {
-        carr[id] = tt.front().first;
-
-     parr[id] = tt.front().second;
-            tt.pop_front();
-        id++;
+        cout << -1;
+        return;
     }
 
-    map<int, bool> cons;
-    for (int i = 1; i <= n; i++)
-    
-        cons[i] = false;
+    long long res = mx / mn;
 
-    
-    double penalm = 0.0;
+    int cnt = 0;
 
- double obt = 0.0;
-
-double mxx = 0.0;
-    double flag = 0.0;
-
-    for (int i = n; i >= 1; i--)
+    while (true)
     {
-        penalm =(double) parr[i]/100.0;
-        obt=(double)  carr[i];
-        mxx = flag * penalm;
+        if (res % 8 == 0)
+            res /= 8;
 
-        if (parr[i] == 0 || obt >= mxx)
-        {
-            cons[i] = true;
-            flag = obt + (1.0 - penalm) * flag;
-        }
+        else if (res % 4 == 0)
+            res /= 4;
+
+        else if (res % 2 == 0)
+            res /= 2;
+
+        else
+            break;
+
+        cnt++;
     }
 
-    cout << fixed << setprecision(10) << flag << endl;
+    if (res != 1)
+    {
+        cout << -1;
+        return;
+    }
+
+    cout << cnt;
 }
 
 int main()
 {
     int t;
     cin >> t;
-    
     while (t--)
     {
         solve();
-        cout << "";
+        cout << endl;
     }
 }
