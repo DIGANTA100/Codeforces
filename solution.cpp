@@ -3,42 +3,52 @@ using namespace std;
 
 void solve()
 {
-    long long n, k, b, s;
-    cin >> n >> k >> b >> s;
-    long long edge = k * b + k - 1 + (n - 1) * (k - 1);
-    if (s < k * b or s > edge)
-    {
-        cout << -1;
+    long long a, b, n, S;
+    cin >> a >> b >> n >> S;
+    if(n==1 and a+b>=S){
+        cout<<"YES";
         return;
     }
 
-    vector<long long> v(n, 0);
-    v[n - 1] = k * b;
-    s -= v[n - 1];
 
-    for (int i = 0; i < n - 1; i++)
+    if (S / n <= a)
     {
-        if (s >= k - 1)
+
+        long long rem = S % n;
+
+        if (rem <= b)
         {
-            v[i] = k - 1;
-            s -= v[i];
+
+            cout << "YES";
+            return;
         }
+
         else
         {
-            v[i] = s;
-            s -= v[i];
+            cout << "NO";
+            return;
         }
     }
-    v[n - 1] += s;
 
-    for (auto &e : v)
-        cout << e << " ";
+    else if (S <= b)
+    {
+        cout << "YES";
+        return;
+    }
+
+    else
+    {
+        cout << "NO";
+        return;
+    }
 }
 
 int main()
 {
     int t;
+
     cin >> t;
+
     while (t--)
     {
         solve();

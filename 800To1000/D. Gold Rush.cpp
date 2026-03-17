@@ -5,10 +5,8 @@ void solve()
 {
     int n, m;
     cin >> n >> m;
-
     queue<int> q;
     bool f = false;
-
     q.push(n);
     while (!q.empty())
     {

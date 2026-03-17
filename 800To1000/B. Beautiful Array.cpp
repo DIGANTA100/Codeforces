@@ -11,11 +11,9 @@ void solve()
         cout << -1;
         return;
     }
-
     vector<long long> v(n, 0);
     v[n - 1] = k * b;
     s -= v[n - 1];
-
     for (int i = 0; i < n - 1; i++)
     {
         if (s >= k - 1)
@@ -34,7 +32,6 @@ void solve()
     for (auto &e : v)
         cout << e << " ";
 }
-
 int main()
 {
     int t;
