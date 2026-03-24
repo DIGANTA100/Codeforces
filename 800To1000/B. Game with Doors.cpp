@@ -7,7 +7,6 @@ int overlap[101]={0};
 for(int i=a;i<=b;i++){
     overlap[i]=1;
 }
-
 int cnt=0;
 int firstol,lastol;
 firstol=0;
@@ -17,42 +16,25 @@ if(overlap[i]==1 and firstol==0){
     firstol=i;
     lastol=i;
 }
-
 if(overlap[i]==1 ){
     cnt++;
     lastol=i;
 }
-
-
-
-
 }
-
 if(!cnt){
     cout<<1;
     return;
 }
-
-//cout<<firstol<<" its ol "<< lastol<<" its cnt "<<cnt<<endl;
-
-
 cnt=lastol-firstol+2;
-
 if(firstol <= a and firstol <=c)
 {cnt--;
 
-// cout<<"worked"<<endl;
 }
 
 if(lastol>=b and lastol>=d)
 cnt--;
-
 cout<<cnt;
-
-
-
 }
-
 int main(){
 int t;
 cin>>t;
@@ -61,7 +43,4 @@ while (t--)
  solve();
  cout<<endl;
 }
-
-
-
 }
